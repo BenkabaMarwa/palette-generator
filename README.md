@@ -22,10 +22,10 @@ A modern, interactive color palette generator built with HTML, CSS, and JavaScri
   - Monochromatic
   - Shades (dark to light)
 - 🔢 **Adjustable Swatch Count**: Generate between 3 and 10 colors.
-- 🎲 **Random Color Generator** — Discover new color combinations instantly.
-- 📋 **Copy Colors** — Copy individual HEX codes, a complete HEX list, or CSS variables.
-- 📥 **Export Palettes** — Download your palette as `.css` or `.txt`.
-- 🔄 **Reset Controls** — Restore the default color and settings.
+- 🎲 **Random Color Generator**: Discover new color combinations instantly.
+- 📋 **Copy Colors**: Copy individual HEX codes, a complete HEX list, or CSS variables.
+- 📥 **Export Palettes**: Download your palette as `.css` or `.txt`.
+- 🔄 **Reset Controls**: Restore the default color and settings.
 - 📱 **Responsive Design** — Adapted for desktop and mobile screens.
 - 💜 **Modern Interface** — Dark theme, purple gradients, and a polished user experience.
 
