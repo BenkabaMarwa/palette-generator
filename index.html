@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Devex | Palette Studio</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #070B18; --bg2: #0D1224; --card: rgba(13,18,36,0.55); --card-border: #252B43;
+        --accent: #8057FF; --accent2: #A78BFA; --accent-soft: rgba(128,87,255,0.15); --warn: #FF6B8A;
+        --text: #F8FAFC; --muted: #A1A1B5;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body {
+        background: radial-gradient(circle at 20% 0%, var(--bg2) 0%, var(--bg) 45%), var(--bg);
+        color: var(--text); font-family: "Inter", sans-serif; min-height: 100vh;
+      }
+      .glow { position: fixed; width: 520px; height: 520px; border-radius: 50%; background: var(--accent); filter: blur(140px); opacity: .18; top: -180px; right: -160px; pointer-events: none; }
+      .glow.two { background: var(--accent2); opacity: .12; top: auto; right: auto; bottom: -200px; left: -160px; }
+      .wrap { position: relative; max-width: 1040px; margin: 0 auto; padding: 48px 24px 40px; }
+      nav { display: flex; align-items: center; gap: 12px; margin-bottom: 44px; }
+      .mark { width: 40px; height: 40px; border-radius: 12px; background: linear-gradient(135deg, var(--accent), var(--accent2)); display: grid; place-items: center; font-weight: 800; font-family: "Poppins", sans-serif; color: #0B0B14; box-shadow: 0 8px 24px rgba(128,87,255,.35); }
+      .brand { font-family: "Poppins", sans-serif; font-weight: 700; font-size: 1.25rem; letter-spacing: -.01em; }
+      .badge { margin-left: auto; font-size: .7rem; color: var(--accent2); background: var(--accent-soft); border: 1px solid rgba(128,87,255,.3); padding: 5px 12px; border-radius: 999px; font-weight: 600; }
+      .hero { margin-bottom: 36px; }
+      .hero h1 { font-family: "Poppins", sans-serif; font-weight: 800; font-size: clamp(1.9rem, 4.5vw, 2.9rem); letter-spacing: -.02em; line-height: 1.15; margin-bottom: 10px; }
+      .hero h1 span { background: linear-gradient(90deg, var(--accent), var(--accent2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+      .hero p { color: var(--muted); font-size: .98rem; }
+
+      .grid2 { display: grid; grid-template-columns: 1fr 1.3fr; gap: 20px; }
+      @media (max-width: 800px) { .grid2 { grid-template-columns: 1fr; } }
+      .card { background: var(--card); border: 1px solid var(--card-border); border-radius: 20px; padding: 26px; backdrop-filter: blur(16px); }
+      .card h3 { font-family: "Poppins", sans-serif; font-size: .85rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 18px; }
+
+      .field { margin-bottom: 16px; }
+      label { display: block; font-size: .78rem; color: var(--muted); margin-bottom: 6px; font-weight: 500; }
+      input[type="text"], select {
+        width: 100%; background: rgba(255,255,255,.05); border: 1px solid var(--card-border); color: var(--text);
+        font-family: "Inter", sans-serif; font-size: .9rem; padding: 11px 14px; border-radius: 12px; outline: none;
+        transition: border-color .2s, box-shadow .2s;
+      }
+      input[type="text"]:focus, select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+      select {
+        cursor: pointer; appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238b93a7'/%3E%3C/svg%3E");
+        background-repeat: no-repeat; background-position: right 14px center;
+      }
+      select option { background: #121826; color: #eef1f7; padding: 10px; }
+      select option:checked, select option:hover { background: var(--accent); color: #06111f; }
+
+      .color-pick {
+        display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,.05);
+        border: 1px solid var(--card-border); border-radius: 12px; padding: 8px 12px; margin-bottom: 16px;
+      }
+      .color-pick label { margin: 0; font-size: .75rem; white-space: nowrap; }
+      input[type="color"] { width: 32px; height: 32px; padding: 0; border: none; border-radius: 8px; overflow: hidden; background: none; cursor: pointer; flex-shrink: 0; }
+      .hex-input { flex: 1; background: transparent; border: none; color: var(--text); font-family: "Inter", sans-serif; font-size: .9rem; outline: none; }
+
+      .slider-row { display: flex; justify-content: space-between; margin-bottom: 6px; }
+      .slider-val { font-size: .8rem; color: var(--accent); font-weight: 600; }
+      input[type="range"] { width: 100%; accent-color: var(--accent); cursor: pointer; }
+
+      .btn-row { display: grid; grid-template-columns: 1fr auto; gap: 10px; margin-top: 6px; }
+      .btn-generate {
+        background: linear-gradient(135deg, var(--accent), var(--accent2)); border: none; color: #0B0B14;
+        font-family: "Poppins", sans-serif; font-weight: 700; font-size: .9rem; padding: 14px; border-radius: 12px;
+        cursor: pointer; transition: transform .15s, box-shadow .2s;
+      }
+      .btn-generate:hover { transform: translateY(-1px); box-shadow: 0 10px 26px rgba(128,87,255,.35); }
+      .btn-clear {
+        background: transparent; border: 1px solid var(--card-border); color: var(--muted);
+        font-family: "Poppins", sans-serif; font-weight: 600; font-size: .85rem; padding: 14px 18px; border-radius: 12px;
+        cursor: pointer; transition: all .2s;
+      }
+      .btn-clear:hover { border-color: var(--warn); color: var(--warn); }
+
+      .palette-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 12px; margin-bottom: 20px; }
+      .swatch-card {
+        border-radius: 14px; overflow: hidden; border: 1px solid var(--card-border); cursor: pointer;
+        transition: transform .15s; background: rgba(255,255,255,.03);
+      }
+      .swatch-card:hover { transform: translateY(-3px); }
+      .swatch-color { height: 90px; }
+      .swatch-info { padding: 8px 10px; text-align: center; }
+      .swatch-hex { font-size: .78rem; font-weight: 600; font-family: "Poppins", sans-serif; }
+      .swatch-tap { font-size: .65rem; color: var(--muted); margin-top: 2px; }
+
+      .export-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+      .btn-dl {
+        background: rgba(255,255,255,.05); border: 1px solid var(--card-border); color: var(--text);
+        font-size: .78rem; font-weight: 600; padding: 12px; border-radius: 10px; cursor: pointer; transition: all .2s;
+      }
+      .btn-dl:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
+
+      .status { font-size: .75rem; color: var(--accent); text-align: center; height: 16px; margin-top: 14px; opacity: 0; transition: opacity .3s; font-weight: 500; }
+      .status.show { opacity: 1; }
+
+      footer { position: relative; text-align: center; padding: 36px 20px 8px; color: var(--muted); font-size: .78rem; }
+      footer .credit { margin-bottom: 12px; }
+      footer .credit a { color: var(--accent); text-decoration: none; font-weight: 600; border-bottom: 1px solid var(--accent-soft); }
+      .social-row { display: flex; justify-content: center; gap: 14px; margin-bottom: 14px; }
+      .social-row a { width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center; background: rgba(255,255,255,.05); border: 1px solid var(--card-border); color: var(--muted); transition: all .2s; }
+      .social-row a:hover { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
+      .social-row svg { width: 18px; height: 18px; fill: currentColor; }
+      .copyright { font-size: .7rem; color: #5a6178; letter-spacing: .02em; }
+    </style>
+  </head>
+  <body>
+    <div class="glow"></div>
+    <div class="glow two"></div>
+
+    <div class="wrap">
+      <nav>
+        <div class="mark">MB</div>
+        <div class="brand">Marwa Benkaba</div>
+        <div class="badge">Palette Studio</div>
+      </nav>
+
+      <div class="hero">
+        <h1>Pick a color,<br /><span>get a full palette.</span></h1>
+        <p>Choose a base color and generate complementary, analogous, triadic, or monochromatic palettes — ready to export.</p>
+      </div>
+
+      <div class="grid2">
+        <!-- LEFT: Controls -->
+        <div class="card">
+          <h3>Base Color</h3>
+          <div class="color-pick">
+            <input type="color" id="base-color" value="#8057FF" oninput="syncFromPicker()" />
+            <input type="text" class="hex-input" id="hex-input" value="#8057FF" oninput="syncFromHex()" />
+          </div>
+
+          <div class="field">
+            <label>Harmony Type</label>
+            <select id="harmony-select" onchange="generatePalette()">
+              <option value="complementary">Complementary</option>
+              <option value="analogous">Analogous</option>
+              <option value="triadic">Triadic</option>
+              <option value="tetradic">Tetradic</option>
+              <option value="monochromatic">Monochromatic</option>
+              <option value="shades">Shades (dark → light)</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <div class="slider-row"><label style="margin:0">Swatch Count</label><span class="slider-val" id="count-val">6</span></div>
+            <input type="range" id="count-slider" min="3" max="10" value="6"
+              oninput="updateVal('count-val',this.value);generatePalette()" />
+          </div>
+
+          <div class="btn-row">
+            <button class="btn-generate" onclick="randomColor()">🎲 Random Color</button>
+            <button class="btn-clear" onclick="resetAll()">Reset</button>
+          </div>
+        </div>
+
+        <!-- RIGHT: Output -->
+        <div class="card">
+          <h3>Palette</h3>
+          <div class="palette-grid" id="palette-grid"></div>
+
+          <h3>Export</h3>
+          <div class="export-row">
+            <button class="btn-dl" onclick="copyAs('css')">📋 Copy as CSS</button>
+            <button class="btn-dl" onclick="copyAs('hex')">📋 Copy Hex List</button>
+            <button class="btn-dl" onclick="downloadAs('css')">↓ Download .css</button>
+            <button class="btn-dl" onclick="downloadAs('txt')">↓ Download .txt</button>
+          </div>
+          <div class="status" id="status-msg"></div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="credit">Created by <a href="https://github.com/BenkabaMarwa" target="_blank" rel="noopener">Marwa Benkaba</a></div>
+        <div class="social-row">
+          <a href="https://github.com/BenkabaMarwa" target="_blank" rel="noopener" aria-label="GitHub">
+            <svg viewBox="0 0 24 24"><path d="M12 .5C5.73.5.98 5.24.98 11.52c0 5.02 3.26 9.28 7.79 10.78.57.1.78-.25.78-.55 0-.27-.01-1.16-.02-2.1-3.17.69-3.84-1.35-3.84-1.35-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.75 1.18 1.75 1.18 1.02 1.75 2.68 1.25 3.33.96.1-.74.4-1.25.72-1.54-2.53-.29-5.19-1.27-5.19-5.63 0-1.24.44-2.26 1.17-3.06-.12-.29-.51-1.45.11-3.02 0 0 .96-.31 3.15 1.17a10.9 10.9 0 0 1 5.73 0c2.19-1.48 3.15-1.17 3.15-1.17.62 1.57.23 2.73.11 3.02.73.8 1.17 1.82 1.17 3.06 0 4.37-2.67 5.33-5.21 5.62.41.35.77 1.04.77 2.1 0 1.52-.01 2.74-.01 3.11 0 .3.21.66.79.55A10.53 10.53 0 0 0 23.02 11.5C23.02 5.24 18.27.5 12 .5z"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/in/marwa-benkaba-916090329/" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+          </a>
+        </div>
+        <div class="copyright">© 2026 Marwa Benkaba. All rights reserved.</div>
+      </footer>
+    </div>
+
+    <script>
+      let currentPalette = [];
+
+      function updateVal(id, val) { document.getElementById(id).textContent = val; }
+      function showStatus(msg, color = "#8057FF") {
+        const el = document.getElementById("status-msg");
+        el.textContent = msg; el.style.color = color; el.classList.add("show");
+        setTimeout(() => el.classList.remove("show"), 2500);
+      }
+
+      function hexToHsl(hex) {
+        hex = hex.replace("#", "");
+        if (hex.length === 3) hex = hex.split("").map((c) => c + c).join("");
+        const r = parseInt(hex.substr(0, 2), 16) / 255;
+        const g = parseInt(hex.substr(2, 2), 16) / 255;
+        const b = parseInt(hex.substr(4, 2), 16) / 255;
+        const max = Math.max(r, g, b), min = Math.min(r, g, b);
+        let h, s, l = (max + min) / 2;
+        if (max === min) { h = s = 0; }
+        else {
+          const d = max - min;
+          s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+          switch (max) {
+            case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+            case g: h = (b - r) / d + 2; break;
+            case b: h = (r - g) / d + 4; break;
+          }
+          h /= 6;
+        }
+        return [h * 360, s * 100, l * 100];
+      }
+
+      function hslToHex(h, s, l) {
+        h = ((h % 360) + 360) % 360; s /= 100; l /= 100;
+        const c = (1 - Math.abs(2 * l - 1)) * s;
+        const x = c * (1 - Math.abs(((h / 60) % 2) - 1));
+        const m = l - c / 2;
+        let r, g, b;
+        if (h < 60) [r, g, b] = [c, x, 0];
+        else if (h < 120) [r, g, b] = [x, c, 0];
+        else if (h < 180) [r, g, b] = [0, c, x];
+        else if (h < 240) [r, g, b] = [0, x, c];
+        else if (h < 300) [r, g, b] = [x, 0, c];
+        else [r, g, b] = [c, 0, x];
+        const toHex = (v) => Math.round((v + m) * 255).toString(16).padStart(2, "0");
+        return "#" + toHex(r) + toHex(g) + toHex(b);
+      }
+
+      function syncFromPicker() {
+        document.getElementById("hex-input").value = document.getElementById("base-color").value.toUpperCase();
+        generatePalette();
+      }
+
+      function syncFromHex() {
+        let val = document.getElementById("hex-input").value.trim();
+        if (!val.startsWith("#")) val = "#" + val;
+        if (/^#([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6})$/.test(val)) {
+          document.getElementById("base-color").value = val;
+          generatePalette();
+        }
+      }
+
+      function randomColor() {
+        const hex = "#" + Math.floor(Math.random() * 16777215).toString(16).padStart(6, "0");
+        document.getElementById("base-color").value = hex;
+        document.getElementById("hex-input").value = hex.toUpperCase();
+        generatePalette();
+      }
+
+      function generatePalette() {
+        const base = document.getElementById("base-color").value;
+        const type = document.getElementById("harmony-select").value;
+        const count = parseInt(document.getElementById("count-slider").value);
+        const [h, s, l] = hexToHsl(base);
+        let colors = [];
+
+        if (type === "complementary") {
+          colors = [base, hslToHex(h + 180, s, l)];
+          while (colors.length < count) {
+            const t = colors.length / count;
+            colors.push(hslToHex(colors.length % 2 === 0 ? h : h + 180, s, Math.min(92, l + t * 30)));
+          }
+        } else if (type === "analogous") {
+          const step = 30;
+          const half = Math.floor(count / 2);
+          for (let i = -half; i < count - half; i++) colors.push(hslToHex(h + i * step, s, l));
+        } else if (type === "triadic") {
+          const base3 = [h, h + 120, h + 240];
+          for (let i = 0; i < count; i++) colors.push(hslToHex(base3[i % 3], s, l + (Math.floor(i / 3)) * 10 - 5));
+        } else if (type === "tetradic") {
+          const base4 = [h, h + 90, h + 180, h + 270];
+          for (let i = 0; i < count; i++) colors.push(hslToHex(base4[i % 4], s, l));
+        } else if (type === "monochromatic") {
+          for (let i = 0; i < count; i++) {
+            const sat = Math.max(15, s - i * 8);
+            colors.push(hslToHex(h, sat, l));
+          }
+        } else if (type === "shades") {
+          for (let i = 0; i < count; i++) {
+            const lt = 10 + (i * 80) / (count - 1);
+            colors.push(hslToHex(h, s, lt));
+          }
+        }
+
+        currentPalette = colors.slice(0, count);
+        renderPalette();
+      }
+
+      function renderPalette() {
+        const grid = document.getElementById("palette-grid");
+        grid.innerHTML = "";
+        currentPalette.forEach((hex) => {
+          const card = document.createElement("div");
+          card.className = "swatch-card";
+          card.onclick = () => copySwatch(hex);
+          card.innerHTML = `
+            <div class="swatch-color" style="background:${hex}"></div>
+            <div class="swatch-info">
+              <div class="swatch-hex">${hex.toUpperCase()}</div>
+              <div class="swatch-tap">tap to copy</div>
+            </div>`;
+          grid.appendChild(card);
+        });
+      }
+
+      function copySwatch(hex) {
+        navigator.clipboard.writeText(hex.toUpperCase()).then(() => showStatus(`✓ Copied ${hex.toUpperCase()}`, "#8057FF"));
+      }
+
+      function buildCss() {
+        return ":root {\n" + currentPalette.map((h, i) => `  --color-${i + 1}: ${h.toUpperCase()};`).join("\n") + "\n}";
+      }
+      function buildHexList() {
+        return currentPalette.map((h) => h.toUpperCase()).join("\n");
+      }
+
+      function copyAs(format) {
+        if (!currentPalette.length) { showStatus("⚠ Generate a palette first", "#FF6B8A"); return; }
+        const text = format === "css" ? buildCss() : buildHexList();
+        navigator.clipboard.writeText(text).then(() => showStatus(`✓ Copied as ${format.toUpperCase()}`, "#8057FF"));
+      }
+
+      function downloadAs(ext) {
+        if (!currentPalette.length) { showStatus("⚠ Generate a palette first", "#FF6B8A"); return; }
+        const text = ext === "css" ? buildCss() : buildHexList();
+        const blob = new Blob([text], { type: "text/plain" });
+        const link = document.createElement("a");
+        link.download = "palette." + ext;
+        link.href = URL.createObjectURL(blob);
+        link.click();
+        showStatus(`↓ palette.${ext} downloaded!`, "#A78BFA");
+      }
+
+      function resetAll() {
+        document.getElementById("base-color").value = "#8057FF";
+        document.getElementById("hex-input").value = "#8057FF";
+        document.getElementById("harmony-select").value = "complementary";
+        document.getElementById("count-slider").value = 6;
+        updateVal("count-val", "6");
+        generatePalette();
+        showStatus("Reset", "#8b93a7");
+      }
+
+      generatePalette();
+    </script>
+  </body>
+</html>
