@@ -26,15 +26,15 @@ A modern, interactive color palette generator built with HTML, CSS, and JavaScri
 - 📋 **Copy Colors**: Copy individual HEX codes, a complete HEX list, or CSS variables.
 - 📥 **Export Palettes**: Download your palette as `.css` or `.txt`.
 - 🔄 **Reset Controls**: Restore the default color and settings.
-- 📱 **Responsive Design** — Adapted for desktop and mobile screens.
-- 💜 **Modern Interface** — Dark theme, purple gradients, and a polished user experience.
+- 📱 **Responsive Design**: Adapted for desktop and mobile screens.
+- 💜 **Modern Interface**: Dark theme, purple gradients, and a polished user experience.
 
 ## 🛠️ Technologies
 
-- **HTML5** — Application structure.
-- **CSS3** — Responsive layout, gradients, and styling.
-- **JavaScript (ES6+)** — Color calculations, palette generation, clipboard operations, and downloads.
-- **Google Fonts** — Poppins and Inter typography.
+- **HTML5**: Application structure.
+- **CSS3**: Responsive layout, gradients, and styling.
+- **JavaScript (ES6+)**: Color calculations, palette generation, clipboard operations, and downloads.
+- **Google Fonts**: Poppins and Inter typography.
 
 ## 📂 Project Structure
 
