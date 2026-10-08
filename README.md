@@ -13,21 +13,21 @@ A modern, interactive color palette generator built with HTML, CSS, and JavaScri
 
 ## ✨ Features
 
-- 🎨 **Custom Base Colors**: Choose a color using the color picker or enter its HEX code.
-- 🌈 **Six Palette Modes**
+- **Custom Base Colors**: Choose a color using the color picker or enter its HEX code.
+- **Six Palette Modes**
   - Complementary
   - Analogous
   - Triadic
   - Tetradic
   - Monochromatic
   - Shades (dark to light)
-- 🔢 **Adjustable Swatch Count**: Generate between 3 and 10 colors.
-- 🎲 **Random Color Generator**: Discover new color combinations instantly.
-- 📋 **Copy Colors**: Copy individual HEX codes, a complete HEX list, or CSS variables.
-- 📥 **Export Palettes**: Download your palette as `.css` or `.txt`.
-- 🔄 **Reset Controls**: Restore the default color and settings.
-- 📱 **Responsive Design**: Adapted for desktop and mobile screens.
-- 💜 **Modern Interface**: Dark theme, purple gradients, and a polished user experience.
+- **Adjustable Swatch Count**: Generate between 3 and 10 colors.
+- **Random Color Generator**: Discover new color combinations instantly.
+- **Copy Colors**: Copy individual HEX codes, a complete HEX list, or CSS variables.
+- **Export Palettes**: Download your palette as `.css` or `.txt`.
+- **Reset Controls**: Restore the default color and settings.
+- **Responsive Design**: Adapted for desktop and mobile screens.
+- **Modern Interface**: Dark theme, purple gradients, and a polished user experience.
 
 ## 🛠️ Technologies
 
