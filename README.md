@@ -8,6 +8,9 @@ A modern, interactive color palette generator built with HTML, CSS, and JavaScri
   <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript" />
 </p>
 
+
+![Devex Palette Studio](screenshots/preview.jpg)
+
 ## ✨ Features
 
 - 🎨 **Custom Base Colors** — Choose a color using the color picker or enter its HEX code.
@@ -98,6 +101,12 @@ The generated palette can be exported as CSS custom properties:
 - 🖌️ Branding and visual identity
 - 💻 CSS styling and frontend development
 - 📱 Application interface design
+
+## 📸 Screenshots
+
+![Devex Pallette Studio](screenshots/pallette-studio.jpg)
+
+![Pallette Editing](screenshots/editing.png)
 
 ## 👩‍💻 Developer
 
