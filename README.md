@@ -8,7 +8,6 @@ A modern, interactive color palette generator built with HTML, CSS, and JavaScri
   <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript" />
 </p>
 
-
 ![Devex Palette Studio](screenshots/preview.jpg)
 
 ## ✨ Features
@@ -121,4 +120,8 @@ The generated palette can be exported as CSS custom properties:
 
 ## 📄 License
 
-No license is specified in the current project source. Add a `LICENSE` file if you intend to distribute the project under a particular open-source license.
+This project is licensed under the [MIT License](LICENSE).
+
+---
+
+© 2026 Marwa Benkaba. All rights reserved.
