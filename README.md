@@ -1,5 +1,7 @@
 # 🎨 Palette Generator
 
+https://palette-generator-color.netlify.app/
+
 A modern, interactive color palette generator built with HTML, CSS, and JavaScript. Choose a base color, generate harmonious color combinations, customize your palette, and export colors for your next design or development project.
 
 <p align="center">
